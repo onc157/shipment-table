@@ -1,52 +1,38 @@
 import { TableCell, TableRow } from '@material-ui/core';
-import { OrderInterface } from '../../../type/orders';
-import { useState } from 'react';
-import styled from 'styled-components';
-
-const StyledInput = styled.input`
-      border: 1px solid grey;
-      caret-color: transparent;
-      &:focus {
-        //border: 2px solid rgb(118, 118, 118);
-        outline: none;
-      }
-      
-      &:hover {
-        
-      }
-    `
-
-interface StyledInputProps {
-    isEditable: Boolean
-}
+import { OrderInterface } from '../../../type/Types';
+import { COLOR_BLACK, COLOR_GREY } from "../../common/Style";
+import { TextField } from "../../common/TextField";
+import { InputField } from "../../common/InputFIeld";
+import { InputFields } from '../index'
 
 export const Order = ({ orderData }: {orderData: OrderInterface}) => {
 
-    const [value, setValue] = useState('');
-
-    const toggle = true;
-
-    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-
-        setValue(newValue)
-    }
-
+    console.log(orderData)
 
     return (
         <TableRow>
             <TableCell>
-                <StyledInput type="text"
-                             value={value}
-                             onChange={toggle ? (e) => inputHandler(e) : () => (console.log(123))}
-                            />
+                <TextField text={orderData.id} isLink={false} weight={400} color={COLOR_BLACK} size={0.875} />
             </TableCell>
-            <TableCell>2</TableCell>
-            <TableCell>3</TableCell>
-            <TableCell>4</TableCell>
-            <TableCell>5</TableCell>
-            <TableCell>6</TableCell>
-            <TableCell>7</TableCell>
+            <TableCell>
+                <InputField name="weight" text={orderData.customer} isLink={false} weight={600} color={COLOR_BLACK} size={0.875} />
+            </TableCell>
+            <TableCell>
+                <InputField text={orderData.item} isLink={false} weight={400} color={COLOR_GREY} size={0.875} />
+            </TableCell>
+            <TableCell>
+                <InputField text="Select!!!!" isLink={false} weight={400} color={COLOR_GREY} size={0.875} />
+            </TableCell>
+            <TableCell>2 Date Picker</TableCell>
+            <TableCell>
+                <InputFields>
+                    <InputField text={orderData.shop?.name} isLink={false} weight={600} color={COLOR_BLACK} size={0.875} />
+                    <InputField text={orderData.shop?.orderNumber} isLink={false} weight={400} color={COLOR_GREY} size={0.875} />
+                </InputFields>
+            </TableCell>
+            <TableCell>
+                <InputField text={orderData.weight} isLink={false} weight={400} color={COLOR_BLACK} size={0.875} />
+            </TableCell>
             <TableCell>8</TableCell>
             <TableCell>9</TableCell>
         </TableRow>

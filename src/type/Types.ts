@@ -4,16 +4,16 @@ export interface OrderInterface {
     item: string;
     status: string;
     orderDate: string;
-    shipmentDate: string | null;
+    shipmentDate?: string | null;
     shop: ShopType | null;
-    weight: string | null;
-    tracking: string | null;
+    weight: string;
+    tracking: string;
     isArchive: Boolean;
 }
 
 export type ShopType = {
-    name: String;
-    orderNumber: String;
+    name: string;
+    orderNumber: string;
 }
 
 export type OrdersInterface = OrderInterface[];

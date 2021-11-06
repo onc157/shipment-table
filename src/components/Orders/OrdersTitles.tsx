@@ -6,11 +6,11 @@ export const OrdersTitles = () => {
     return (
         <TableHead>
             <TableRow>
-                {headCells.map((elem) => <>
-                    <TableCellStyled>
+                {headCells.map((elem, i) =>
+                    <TableCellStyled key={i + elem.name}>
                         {elem.name}
                     </TableCellStyled>
-                </>)}
+                )}
             </TableRow>
         </TableHead>
     )

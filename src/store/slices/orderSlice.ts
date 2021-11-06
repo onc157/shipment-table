@@ -1,36 +1,52 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from "../../app/store";
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {OrdersInterface} from "../../type/Types";
+import {RootState} from "../../app/store";
+import {ordersAPI} from "../../api/ordersAPI";
 
-interface OrderState {
-    id: number | null,
-    name: string | null
+export const getAllOrders = createAsyncThunk(
+    'orders/getAllOrders',
+    async function() {
+        return ordersAPI.getAllOrders()
+    }
+)
+
+export const updateOrder = createAsyncThunk(
+    'orders/updateOrder',
+    async function (payload: any) {
+        return ordersAPI.updateOrder(payload)
+    }
+)
+
+export interface OrdersState {
+    orders: OrdersInterface,
+    status: string | null,
+    error: string | null,
 }
 
-const initialState: OrderState = {
-    id: null,
-    name: null
+const initialState: OrdersState = {
+    orders: [],
+    status: null,
+    error: null,
 }
 
 export const orderSlice = createSlice({
-    name: 'order',
+    name: 'orders',
     initialState,
     reducers: {
-        setId: (state) => {
-            state.id = 5;
-        },
-        setName: (state) => {
-            state.name = 'John';
-        },
-        incId: (state, action: PayloadAction<number>) => {
-            if (state.id) {
-                state.id += action.payload;
-            }
-        }
-     }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getAllOrders.pending, (state) => {
+                state.status = 'loading...';
+            })
+            .addCase(getAllOrders.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.orders = action.payload.payload;
+            })
+    },
 })
 
-export const { setId, setName, incId } = orderSlice.actions;
-
-export const selectOrderName = (state: RootState) => state.order.name;
+// export const { increment } = orderSlice.actions;
+export const ordersSelector = (state: RootState) => state.order.orders
 
 export default orderSlice.reducer;

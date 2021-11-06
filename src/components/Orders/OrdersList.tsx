@@ -1,11 +1,20 @@
-import { TableBody } from '@material-ui/core';
-import { orders } from '../../utils/orders';
+import {CircularProgress, TableBody, TableCell, TableRow} from '@material-ui/core';
 import { Order } from './Order';
+import {OrdersInterface} from "../../type/Types";
+import {useAppSelector} from "../../app/hooks";
 
-export const OrdersList = () => {
+export const OrdersList = ({ orders }: { orders: OrdersInterface }) => {
+    const status = useAppSelector(state => state.order.status);
+
     return (
         <TableBody>
-            {orders.map((order) => <Order orderData={order} key={order.id}/>  )}
+            {status !== 'resolved'
+                ? <TableRow>
+                    <TableCell>
+                        <CircularProgress />
+                    </TableCell>
+                </TableRow>
+                : orders?.map((order, i) => <Order orderData={order} key={i}/>  )}
         </TableBody>
     )
 }
