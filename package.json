@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.13"
+    "@types/styled-components": "^5.1.13",
+    "prettier": "2.5.1"
   }
 }
