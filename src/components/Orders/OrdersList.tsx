@@ -1,14 +1,14 @@
 import {CircularProgress, TableBody, TableCell, TableRow} from '@material-ui/core';
 import { Order } from './Order';
-import {OrdersInterface} from "../../type/Types";
+import {IOrders} from "../../type/Types";
 import {useAppSelector} from "../../app/hooks";
 
-export const OrdersList = ({ orders }: { orders: OrdersInterface }) => {
-    const status = useAppSelector(state => state.order.status);
+export const OrdersList = ({ orders, status }: { orders: IOrders, status: string }) => {
+    // const status = useAppSelector(state => state.order.status);
 
     return (
         <TableBody>
-            {status !== 'resolved'
+            {status !== 'fulfilled'
                 ? <TableRow>
                     <TableCell>
                         <CircularProgress />

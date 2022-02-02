@@ -1,11 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import orderSlice from "../store/slices/orderSlice";
+import {OrdersService} from "../api/OrdersService";
+import {setupListeners} from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
-    order: orderSlice
+    [OrdersService.reducerPath]: OrdersService.reducer
   },
+  middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(OrdersService.middleware)
 });
+
+setupListeners(store.dispatch);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

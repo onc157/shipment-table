@@ -7,6 +7,7 @@ export const ordersAPI = {
     },
 
     updateOrder: async (payload: any) => {
+        console.log({payload})
         const {id, ...data} = payload
         const res = await instance.put(`orders/${id}`, data);
         return res.data;

@@ -1,4 +1,4 @@
-export interface OrderInterface {
+export interface IOrder {
     id: string;
     customer: string;
     item: string;
@@ -16,4 +16,4 @@ export type ShopType = {
     orderNumber: string;
 }
 
-export type OrdersInterface = OrderInterface[];
+export type IOrders = IOrder[] | undefined;
