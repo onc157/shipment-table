@@ -30,7 +30,7 @@ export const headCells = [
         width: '100%',
     },
     {
-        name: 'Вес',
+        name: 'Вес, гр',
         isSorted: true,
         width: '100%',
     },

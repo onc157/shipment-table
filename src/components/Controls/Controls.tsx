@@ -1,16 +1,15 @@
-import { Button, SearchField } from '../common';
-import { COLOR_BLUE } from '../common/Style';
-import React from 'react';
-import { ControlsStyled } from './Controls.style';
+import { SearchField } from '../common'
+import React from 'react'
+import { ControlsStyled } from './Controls.style'
+import { NewOrder } from '../NewOrder/NewOrder'
 
 const Controls = () => {
-
     return (
         <ControlsStyled>
-            <SearchField/>
-            <Button bgcolor={COLOR_BLUE} >+ Новый заказ</Button>
+            <SearchField />
+            <NewOrder />
         </ControlsStyled>
-    );
-};
+    )
+}
 
-export default Controls;
+export default Controls

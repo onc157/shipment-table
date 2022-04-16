@@ -1,19 +1,16 @@
-import * as React from 'react';
-import {TextFieldStyled} from "./TextField.style";
+import * as React from 'react'
+import { TextFieldStyled } from './TextField.style'
 
-interface TextFieldI {
-    text: string;
-    isLink: Boolean;
-    weight: number;
-    color: string;
-    size: number;
+interface TextFieldInterface {
+    text: string
+    isLink: Boolean
+    weight: number
+    color: string
+    fontSize: number
 }
 
-export const TextField = ({text, isLink, weight, color, size}: TextFieldI) => {
-    return (
-        <TextFieldStyled isLink={isLink}
-                         weight={weight}
-                         color={color}
-                         size={size}>{text}</TextFieldStyled>
-    );
-};
+export const TextField = (props: TextFieldInterface) => {
+    const { text } = props
+
+    return <TextFieldStyled {...props}>{text}</TextFieldStyled>
+}

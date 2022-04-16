@@ -1,20 +1,24 @@
-import {CircularProgress, TableBody, TableCell, TableRow} from '@material-ui/core';
-import { Order } from './Order';
-import {IOrders} from "../../type/Types";
-import {useAppSelector} from "../../app/hooks";
+import { TableBody } from '@material-ui/core'
+import { Order } from './Order'
+import { IOrders } from '../../type/Types'
+import { Loader } from '../common'
 
-export const OrdersList = ({ orders, status }: { orders: IOrders, status: string }) => {
-    // const status = useAppSelector(state => state.order.status);
-
+export const OrdersList = ({
+    orders,
+    isLoading,
+}: {
+    orders: IOrders
+    isLoading: boolean
+}) => {
     return (
         <TableBody>
-            {status !== 'fulfilled'
-                ? <TableRow>
-                    <TableCell>
-                        <CircularProgress />
-                    </TableCell>
-                </TableRow>
-                : orders?.map((order, i) => <Order orderData={order} key={i}/>  )}
+            {isLoading ? (
+                <Loader />
+            ) : (
+                orders?.map((order, i) => (
+                    <Order orderData={order} key={i} isLoading={isLoading} />
+                ))
+            )}
         </TableBody>
     )
 }

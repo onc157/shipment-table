@@ -1,13 +1,68 @@
-import * as React from 'react';
-import {useState} from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import ru from 'date-fns/locale/ru'
+import * as React from 'react'
+import { useState } from 'react'
+import { useUpdateOrderMutation } from '../../../api/OrdersService'
+import { Loader } from '../Loader'
+import { FieldsName } from '../../../type/Enums'
+import { DateFieldStyled } from './DateField.style'
+import moment from 'moment'
+import 'moment/locale/ru'
+import { DatePicker } from '@material-ui/pickers'
+import { ClickAwayListener } from '@mui/material'
 
-export const DateField = () => {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
+moment.locale('ru')
+
+interface IDateField {
+    date?: Date
+    _id: string
+    name: FieldsName
+    disabled?: boolean
+}
+
+export const DateField = ({
+    date,
+    _id,
+    name,
+    disabled = false,
+}: IDateField) => {
+    const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation()
+
+    const [dateValue, setDateValue] = useState<Date | null>(
+        date ? new Date(date) : null
+    )
+
+    const updateDateHandler = (date: Date | null) => {
+        if (date) {
+            setDateValue(date)
+            updateOrder({ id: _id, [name]: date })
+        }
+    }
+    const [open, setOpen] = React.useState(false)
+
+    const handleClick = () => {
+        setOpen((prev) => !prev)
+    }
+
+    const handleClickAway = () => {
+        setOpen(false)
+    }
 
     return (
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} locale={ru}/>
-    );
-};
+        <ClickAwayListener onClickAway={handleClickAway}>
+            <div style={{ minWidth: '140px' }}>
+                {isUpdating ? (
+                    <Loader size={'sm'} />
+                ) : (
+                    <DatePicker
+                        open={open}
+                        onOpen={handleClick}
+                        value={dateValue}
+                        mask="__.__.____"
+                        onChange={(newValue) => updateDateHandler(newValue)}
+                        renderInput={(props) => <DateFieldStyled {...props} />}
+                        disabled={disabled}
+                    />
+                )}
+            </div>
+        </ClickAwayListener>
+    )
+}
