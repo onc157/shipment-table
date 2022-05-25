@@ -26,6 +26,7 @@ export const DateField = ({
 }: IDateField) => {
     const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation()
 
+    const [open, setOpen] = useState(false)
     const [dateValue, setDateValue] = useState<Date | null>(
         date ? new Date(date) : null
     )
@@ -33,12 +34,12 @@ export const DateField = ({
     const updateDateHandler = (date: Date | null) => {
         if (date) {
             setDateValue(date)
-            updateOrder({ id: _id, [name]: date })
+            handleOpen()
+            updateOrder({ _id: _id, [name]: date })
         }
     }
-    const [open, setOpen] = React.useState(false)
 
-    const handleClick = () => {
+    const handleOpen = () => {
         setOpen((prev) => !prev)
     }
 
@@ -54,7 +55,7 @@ export const DateField = ({
                 ) : (
                     <DatePicker
                         open={open}
-                        onOpen={handleClick}
+                        onOpen={handleOpen}
                         value={dateValue}
                         mask="__.__.____"
                         onChange={(newValue) => updateDateHandler(newValue)}

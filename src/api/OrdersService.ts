@@ -21,8 +21,8 @@ export const OrdersService = createApi({
             invalidatesTags: ['Orders'],
         }),
         updateOrder: build.mutation<IOrder, Partial<IOrder>>({
-            query: ({ id, ...data }) => ({
-                url: `orders/${id}`,
+            query: ({ _id, ...data }) => ({
+                url: `orders/${_id}`,
                 method: 'PUT',
                 body: data,
             }),

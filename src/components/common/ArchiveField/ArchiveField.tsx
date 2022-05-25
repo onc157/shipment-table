@@ -14,7 +14,7 @@ export const ArchiveField = ({ _id, name }: IArchiveField) => {
     const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation()
 
     const archiveHandler = () => {
-        updateOrder({ id: _id, [name]: true })
+        updateOrder({ _id: _id, [name]: true })
     }
 
     return (

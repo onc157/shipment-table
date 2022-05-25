@@ -1,15 +1,23 @@
-import { HeaderWrapper, HeaderTitle, HeaderDescription } from './Header.style';
-import React from 'react';
-import HeaderLogin from '../HeaderLogin/HeaderLogin';
+import { HeaderWrapper, HeaderTitle, HeaderDescription } from './Header.style'
+import React from 'react'
+import HeaderLogin from '../HeaderLogin/HeaderLogin'
+import { IUser } from '../../type/Types'
 
-const Header = () => {
+interface IHeader {
+    user: {
+        data?: IUser
+        isLoading: boolean
+    }
+}
+
+const Header = ({ user }: IHeader) => {
     return (
         <HeaderWrapper position="static">
-            <HeaderTitle>Учет заказов</HeaderTitle>
-            <HeaderDescription>3200 позиций</HeaderDescription>
-            <HeaderLogin/>
+            <HeaderTitle>KROTOV.PRO</HeaderTitle>
+            <HeaderDescription>Shipment Table</HeaderDescription>
+            <HeaderLogin user={user} />
         </HeaderWrapper>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

@@ -19,7 +19,7 @@ export const SelectField = ({ dataValue, _id, name, values }: ISelectField) => {
     const [value, setValue] = useState(dataValue)
 
     const updateValue = (value: string) => {
-        updateOrder({ id: _id, [name]: value })
+        updateOrder({ _id: _id, [name]: value })
     }
 
     const handleChange = ({
