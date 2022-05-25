@@ -14,17 +14,15 @@ export const InputFieldStyled = styled.input<InputFieldStyleI>`
     font-weight: ${(props) => props.weight};
     color: ${(props) => props.color};
     transition: 0.2s;
+
     &:focus {
         color: ${COLOR_GREY};
-        font-size: 0.75rem;
         font-weight: 400;
         font-style: italic;
         outline: none;
     }
     &:hover {
         color: ${COLOR_GREY};
-        font-size: 0.75rem;
-        font-weight: 400;
         font-style: italic;
         outline: none;
     }

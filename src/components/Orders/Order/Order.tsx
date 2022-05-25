@@ -25,7 +25,10 @@ export const Order = ({
             ) : (
                 <TableRow>
                     <TableCell>
-                        <TextField text={orderData.id} {...FieldsConfig.id} />
+                        <TextField
+                            text={orderData.indexNumber}
+                            {...FieldsConfig.id}
+                        />
                     </TableCell>
                     <TableCell>
                         <InputField

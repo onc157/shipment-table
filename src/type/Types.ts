@@ -1,7 +1,7 @@
 import { ServiceName, ServiceValue, StatusName, StatusValue } from './Enums'
 
 export interface IOrder {
-    id: string
+    indexNumber: string
     customer: string
     item: string
     status: string
@@ -29,4 +29,10 @@ export interface IStatus {
 export interface IService {
     name: ServiceName
     value: ServiceValue
+}
+
+export interface IUser {
+    email: string
+    name: string
+    avatar: string
 }

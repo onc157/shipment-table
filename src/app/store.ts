@@ -1,13 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { OrdersService } from '../api/OrdersService'
 import { setupListeners } from '@reduxjs/toolkit/query'
+import { UserService } from '../api/UserService'
 
 export const store = configureStore({
     reducer: {
         [OrdersService.reducerPath]: OrdersService.reducer,
+        [UserService.reducerPath]: UserService.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(OrdersService.middleware),
+        getDefaultMiddleware()
+            .concat(OrdersService.middleware)
+            .concat(UserService.middleware),
 })
 
 setupListeners(store.dispatch)

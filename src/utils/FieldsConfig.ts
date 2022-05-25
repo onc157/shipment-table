@@ -14,7 +14,7 @@ export const FieldsConfig = {
         isLink: false,
         weight: 600,
         color: COLOR_BLACK,
-        fontSize: 0.875,
+        fontSize: 1,
     },
     item: {
         name: FieldsName.ITEM,

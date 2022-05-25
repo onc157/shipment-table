@@ -20,6 +20,7 @@ export const InputField = (props: InputFieldI) => {
     const { name, text, _id } = props
 
     const [value, setValue] = useState(text || '')
+    const [prevValue, setPrevValue] = useState<string | number>('')
 
     const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation()
 
@@ -28,10 +29,10 @@ export const InputField = (props: InputFieldI) => {
     }
 
     const updateHandler = ({ target }: { target: HTMLInputElement }) => {
-        if (!target.value) {
-            setValue(`${text}`)
+        if (!target.value || target.value === String(prevValue)) {
+            return
         } else {
-            updateOrder({ id: _id, [name]: target.value })
+            updateOrder({ _id: _id, [name]: target.value })
         }
     }
 
@@ -42,6 +43,7 @@ export const InputField = (props: InputFieldI) => {
             ) : (
                 <InputFieldStyled
                     value={value}
+                    onFocus={() => setPrevValue(value)}
                     onChange={inputHandler}
                     onBlur={updateHandler}
                     {...props}
