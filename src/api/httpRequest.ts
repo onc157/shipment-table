@@ -6,7 +6,7 @@ export type RTKResponse<T extends any> = {
 }
 
 export const httpRequest = fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/',
+    baseUrl: 'https://onc157.ru',
     prepareHeaders: (headers) => {
         const token = getGToken()
 

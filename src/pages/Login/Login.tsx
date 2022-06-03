@@ -33,7 +33,7 @@ export const Login = () => {
     }, [setAuthorizing, locToken])
 
     const loginGoogle = () => {
-        window.location.href = 'http://localhost:4000/auth/google'
+        window.location.href = 'https://onc157.ru/auth/google'
     }
 
     return (
