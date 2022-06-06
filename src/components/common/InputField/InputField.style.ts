@@ -5,7 +5,7 @@ interface InputFieldStyleI {
     isLink: Boolean
     weight: number
     color: string
-    fontSize: number
+    fontSize: string
 }
 
 export const InputFieldStyled = styled.input<InputFieldStyleI>`

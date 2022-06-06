@@ -16,11 +16,14 @@ import { useCreateOrderMutation } from '../../api/OrdersService'
 import { DatePicker } from '@material-ui/pickers'
 import { Services } from '../../constants/statuses'
 import { ServiceValue } from '../../type/Enums'
+import { NewOrderAlert } from './NewOrderAlert'
+import { Snackbar } from '../common/Snackbar'
 
 export const NewOrder = () => {
-    const [createOrder] = useCreateOrderMutation()
+    const [createOrder, { isLoading, isSuccess }] = useCreateOrderMutation()
 
     const [isOpen, setIsOpen] = useState(false)
+    const [isAlertShow, setIsAlertShow] = useState(isSuccess)
 
     const handleOpen = () => setIsOpen(true)
     const handleClose = () => setIsOpen(false)
@@ -46,7 +49,7 @@ export const NewOrder = () => {
         validationSchema: validationSchema,
         onSubmit: (values: any) => {
             // alert(JSON.stringify(values, null, 2))
-            createOrder(values)
+            createOrder(values).then(() => setIsAlertShow(true))
         },
     })
 
@@ -55,8 +58,13 @@ export const NewOrder = () => {
             <Button bgcolor={COLOR_BLUE} onClick={handleOpen}>
                 + Новый заказ
             </Button>
+            <Snackbar
+                isOpen={isAlertShow}
+                onClose={() => setIsAlertShow(false)}
+            />
             <Dialog disableEnforceFocus open={isOpen} onClose={handleClose}>
                 <WrapperStyled onSubmit={formik.handleSubmit}>
+                    {isLoading && <NewOrderAlert />}
                     <Typography variant="h5" gutterBottom>
                         Новый заказ
                     </Typography>
