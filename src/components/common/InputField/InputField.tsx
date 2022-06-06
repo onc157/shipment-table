@@ -12,7 +12,7 @@ interface InputFieldI {
     isLink: Boolean
     weight: number
     color: string
-    fontSize: number
+    fontSize: string
     _id: string
 }
 

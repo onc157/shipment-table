@@ -4,7 +4,7 @@ interface TextFieldStyleI {
     isLink: Boolean
     weight: number
     color: string
-    fontSize: number
+    fontSize: string
 }
 
 export const TextFieldStyled = styled.span<TextFieldStyleI>`

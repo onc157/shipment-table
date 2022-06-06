@@ -6,7 +6,7 @@ interface TextFieldInterface {
     isLink: Boolean
     weight: number
     color: string
-    fontSize: number
+    fontSize: string
 }
 
 export const TextField = (props: TextFieldInterface) => {

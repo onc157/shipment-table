@@ -3,6 +3,7 @@ import { Button, Select, TextField } from '@material-ui/core'
 import { COLOR_BLUE, COLOR_WHITE } from '../common'
 
 export const WrapperStyled = styled.form`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
